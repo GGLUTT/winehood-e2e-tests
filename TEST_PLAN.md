@@ -19,7 +19,7 @@ Negative paths and boundaries are covered as well as happy paths. Server answers
 | Checkout | items and totals, phone prefix, required fields, invalid e-mails, courier +99 ₴, courier needs city and address, full order with all details on confirmation, each payment method, cart emptied after order, empty cart, direct confirmation URL, invalid customer data | 18 |
 | Login / registration | required fields, e-mail format, error clears on typing, password visibility, 401, 423 with server message, 500, success saves session, network failure, register rules (name, e-mail, password length, passwords match), exactly 8 chars boundary, 409, success payload | 18 |
 | Navigation and layout | header menu, logo, footer info pages, 404, newsletter required and success, no horizontal scroll on phone / tablet / laptop for home, catalog, checkout | 22 |
-| **Total** | | **109** (90 passing, 19 documenting 14 known bugs) |
+| **Total** | | **109** (88 passing, 21 documenting 14 known bugs) |
 
 ## Test design techniques used
 - **Equivalence partitioning and boundary values:** price range (inside, exact boundary), password length (7 vs 8 chars), quantity (never below 1), plural forms (1 / 2 / 5).
