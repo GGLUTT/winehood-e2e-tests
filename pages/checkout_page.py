@@ -63,6 +63,6 @@ class OrderSuccessPage(BasePage):
         return self.page.get_by_role("heading", name="Ваше замовлення").locator("xpath=..").locator("li")
 
     def wait(self):
-        self.page.wait_for_url(re.compile(r"#/order-success"))
+        expect(self.page).to_have_url(re.compile(r"#/order-success"))
         expect(self.heading).to_have_text("Дякуємо за замовлення!")
         return self
