@@ -20,7 +20,7 @@ from pages.base import BasePage
 def test_header_menu_links(page, link, route, heading):
     home = BasePage(page).open()
     home.nav_link(link).click()
-    page.wait_for_url(f"**#{route}")
+    expect(page).to_have_url(re.compile(re.escape(f"#{route}") + "$"))
     expect(page.get_by_role("heading").first).to_be_visible()
     expect(page.locator(".not-found-title")).to_have_count(0)
     if heading:
@@ -30,7 +30,7 @@ def test_header_menu_links(page, link, route, heading):
 def test_logo_returns_to_home(page):
     BasePage(page).open("/catalog")
     page.get_by_role("link", name="Wine Hood — на головну").click()
-    page.wait_for_url(re.compile(r"#/$"))
+    expect(page).to_have_url(re.compile(r"#/$"))
 
 
 @pytest.mark.bug
@@ -39,7 +39,7 @@ def test_logo_returns_to_home(page):
 def test_footer_info_pages_exist(page, route):
     BasePage(page).open()
     page.locator(f"footer a[href='#{route}']").click()
-    page.wait_for_url(f"**#{route}")
+    expect(page).to_have_url(re.compile(re.escape(f"#{route}") + "$"))
     page.wait_for_load_state("networkidle")
     page.wait_for_timeout(1000)  # let the router render the new route before checking for 404
     assert page.locator(".not-found-title").count() == 0, f"#{route} shows the 404 page"

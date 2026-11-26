@@ -38,5 +38,5 @@ def test_rejecting_age_sends_user_away_from_store(new_visitor):
     new_visitor.route("https://www.google.com/**", lambda route: route.fulfill(body="left the store"))
     new_visitor.goto(BASE_URL)
     new_visitor.get_by_role("button", name="НІ, МЕНІ ЩЕ НЕМАЄ 18").click()
-    new_visitor.wait_for_url(re.compile(r"google\.com"))
+    expect(new_visitor).to_have_url(re.compile(r"google\.com"))
     assert new_visitor.evaluate("localStorage.getItem('ageVerified')") is None

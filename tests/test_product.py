@@ -9,7 +9,7 @@ from pages.product_page import ProductPage
 
 def test_clicking_card_opens_product_page(catalog):
     catalog.open_product(0)
-    catalog.page.wait_for_url(re.compile(r"#/product/\d+$"))
+    expect(catalog.page).to_have_url(re.compile(r"#/product/\d+$"))
     expect(ProductPage(catalog.page).title).to_be_visible()
 
 

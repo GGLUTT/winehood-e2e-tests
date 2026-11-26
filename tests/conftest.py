@@ -1,5 +1,7 @@
+import re
+
 import pytest
-from playwright.sync_api import Page
+from playwright.sync_api import Page, expect
 
 from pages.cart import Cart
 from pages.catalog_page import CatalogPage
@@ -44,5 +46,5 @@ def checkout_with_item(catalog, cart):
     catalog.add_to_cart(0)
     cart.open().go_to_checkout()
     checkout = CheckoutPage(catalog.page)
-    checkout.page.wait_for_url("**#/checkout")
+    expect(checkout.page).to_have_url(re.compile(r"#/checkout$"))
     return checkout, name, price

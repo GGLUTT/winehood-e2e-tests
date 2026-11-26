@@ -1,4 +1,6 @@
 """Header search: free text over name, producer, country and wine type."""
+import re
+
 import pytest
 from playwright.sync_api import expect
 
@@ -13,7 +15,7 @@ def search(page, query: str):
     expect(box).to_be_visible()
     box.fill(query)
     box.press("Enter")
-    page.wait_for_url("**#/catalog?q=*")
+    expect(page).to_have_url(re.compile(r"#/catalog\?q="))
     return CatalogPage(page)
 
 

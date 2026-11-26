@@ -101,7 +101,7 @@ def test_checkout_with_empty_cart_offers_catalog(page):
     CheckoutPage(page).open()
     expect(page.get_by_role("heading", level=1)).to_have_text("Ваш кошик порожній")
     page.get_by_role("link", name="Перейти до каталогу").first.click()
-    page.wait_for_url("**#/catalog")
+    expect(page).to_have_url(re.compile(r"#/catalog$"))
 
 
 def test_confirmation_page_opened_directly_says_order_not_found(page):
